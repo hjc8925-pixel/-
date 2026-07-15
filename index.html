@@ -313,6 +313,8 @@ const DATA_DEFAULT = [
       method:'정체를 철저히 숨기고 접근한다. 기성 교회에 신도를 위장 잠입시켜(추수꾼) 친분을 쌓은 뒤 "좋은 성경공부"로 복음방·신학원에 끌어들인다. 작은 교회를 통째로 신천지로 바꾸는 "산 옮기기", 길거리 설문조사, 재능기부·문화·심리검사 단체 사칭, 전화 포교(TM) 등 200쪽 분량의 치밀한 포교 교본을 따른다.',
       danger:'이만희를 보혜사로 신격화하고, 성경 전체를 자의적 비유풀이로 왜곡하며, 신천지 등록을 구원의 조건으로 삼는다. 정체를 숨긴 위장 잠입으로 교회를 분열시키고 가정을 파괴해 가출·이혼 등 심각한 사회 문제를 일으킨다.',
       disguise:['신천지예수교 증거장막성전','시온기독교선교센터·복음방·신학원','위장 교회·위장 기독 동아리','각종 설문조사·재능기부·문화·심리검사 단체','하늘문화세계평화광복(HWPL)·만남 단체'],
+      listUrl:'https://m.blog.naver.com/hwaseon1104/223916855379',
+      listLabel:'신천지 위장 단체 목록 보기 (외부)',
       source:'신천지 관련 내용은 「이단 바로알기」(현대종교)를 참고했습니다.'
     },
     debates:[
@@ -327,7 +329,7 @@ const DATA_DEFAULT = [
         {who:'them',text:'성경의 씨·열매·양식은 "말씀", 나무·눈은 "사람", 열매·고기는 "성도"를 뜻합니다. 이렇게 비유를 풀어야 진짜 뜻을 압니다.'},
         {who:'us',text:'성경은 비유를 쓸 때 본문이나 문맥에서 스스로 그 뜻을 밝혀 줍니다. 단어마다 정해진 암호를 끼워 맞추는 "비유풀이"는 성경이 아니라 신천지가 만든 사전입니다. 이런 단어 풀이를 가르친다면 신천지로 보면 됩니다.',verse:['벧후 1:20','성경의 모든 예언은 사사로이 풀 것이 아니니'],note:'분별 포인트'}
       ]},
-      {topic:'두 가지 씨가 있고, 추수받아야 구원이다?', icon:'ti-wheat', turns:[
+      {topic:'두 가지 씨가 있고, 추수받아야 구원이다?', icon:'ti-plant-2', turns:[
         {who:'them',text:'세상에는 하나님의 씨와 마귀의 씨, 두 가지 씨가 있습니다. 하나님의 씨로 난 자들만 추수됩니다. 추수에 대해 보고 듣지 못한 자는 소경입니다.'},
         {who:'us',text:'예수님은 가라지 비유에서 그 뜻을 직접 풀어 주셨습니다. 추수는 세상 끝에 일어나는 일이고, 추수하는 자는 사람이 아니라 천사들입니다. 지금 어떤 사람이 사람을 "추수"한다는 말은 성경 어디에도 없습니다.',verse:['마 13:39','추수 때는 세상 끝이요 추수꾼은 천사들이니']},
         {who:'them',text:'그래도 추수를 모르면 구원에서 제외되는 것 아닌가요?'},
@@ -400,6 +402,8 @@ const DATA_DEFAULT = [
       method:'대학 동아리(CGM), 문화·예술·스포츠·모델로 청년에게 접근한다. 외모가 뛰어난 학생을 의도적으로 포섭하고, 길거리 캐스팅(GACP)·홍보단 모집 등으로 정체를 숨긴 채 다가가 30개론 성경공부로 끌어들인다.',
       danger:'정명석을 재림 그리스도로 신격화하고, 다수의 여신도 성범죄로 징역 10년이 확정(2009)된 반사회적 단체다. 통일교를 닮은 성적 타락론과 점진적 구원론으로 청년·대학생을 표적 삼아 위장 포교하는 점이 특히 위험하다.',
       disguise:['기독교복음선교회(CGM)','GACP·길거리 캐스팅','일출예술단·스타모델단','밝은미소운동본부','"예수교대한감리회 진리측"·"대한예수교장로회" 사칭','30개론 성경공부'],
+      listUrl:'https://m.blog.naver.com/hwaseon1104/224146444472',
+      listLabel:'JMS 위장 단체 목록 보기 (외부)',
       source:'JMS 관련 내용은 「이단 바로알기」(현대종교)를 참고했습니다.'
     },
     debates:[
@@ -861,6 +865,7 @@ function seeResult(){
         <button class="btn btn-primary btn-sm" onclick="showGroupTab('${top.g.id}')"><i class="ti ti-book-2"></i> ${top.g.short} 정리 보기</button>
         ${top.g.debates&&top.g.debates.length?`<button class="btn btn-sm" onclick="goDebate('${top.g.id}')"><i class="ti ti-messages"></i> ${top.g.short} — 성경의 답 보기</button>`:''}
       </div>
+      ${top.g.info&&top.g.info.listUrl?listBtnHtml(top.g.info):''}
     </div>`;
   resEl.scrollIntoView({behavior:'smooth',block:'start'});
 }
@@ -881,6 +886,13 @@ function renderGroups(){
   showGroup(DATA[0].id);
 }
 
+function listBtnHtml(inf){
+  if(!inf||!inf.listUrl) return '';
+  var label = inf.listLabel || '위장 단체 목록 보기 (외부)';
+  var btn = '<div style="margin-top:8px"><a class="btn btn-sm" href="'+inf.listUrl+'" target="_blank" rel="noopener" style="text-decoration:none;color:var(--teal-d);border-color:var(--teal)"><i class="ti ti-external-link"></i> '+label+'</a></div>';
+  var note = '<div style="font-size:11px;color:var(--text3);margin-top:5px;line-height:1.5">※ 외부 블로그(이화선 CCC 간사)로 연결됩니다. 실제 활동을 추적한 참고 자료이며, 동명의 정상 단체가 있을 수 있으니 분별에 유의하세요.</div>';
+  return btn + note;
+}
 function showGroup(id, btn){
   if(btn){document.querySelectorAll('#g-pills .group-pill').forEach(p=>p.classList.remove('on'));btn.classList.add('on');}
   const g=DATA.find(x=>x.id===id);
@@ -894,6 +906,7 @@ function showGroup(id, btn){
       <div class="info-block danger-block"><div class="lab"><i class="ti ti-alert-triangle"></i> 왜 위험한가</div><div class="txt">${inf.danger}</div></div>
       <div class="info-block"><div class="lab"><i class="ti ti-eye-exclamation"></i> 주의할 위장 명칭</div><div>${inf.disguise.map(d=>`<span class="tag">${d}</span>`).join('')}</div></div>
       <div style="margin-top:4px"><button class="btn btn-primary btn-sm" onclick="goDebate('${g.id}')"><i class="ti ti-messages"></i> 이 단체에 성경은 이렇게 답해요</button></div>
+      ${listBtnHtml(inf)}
       ${inf.source?`<div class="src"><i class="ti ti-quote" style="font-size:11px"></i> ${inf.source}</div>`:''}
     </div>`;
 }
